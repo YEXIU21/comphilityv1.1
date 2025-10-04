@@ -856,53 +856,106 @@ export default {
 /* iPhone 14 Pro Max and similar devices (430px width) - Enhanced Mobile Sizing */
 @media (max-width: 430px) {
   .hero-section {
-    padding: 2rem 0 1rem;
-    min-height: 65vh;
+    padding: 3rem 0 2rem;
+    min-height: 70vh;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .hero-badge {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    margin-bottom: 1.5rem;
   }
   
   .hero-title {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    margin-bottom: 1.25rem;
-    font-weight: 800;
+    font-size: 2.75rem;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -1px;
   }
   
   .hero-subtitle {
-    font-size: 1.125rem;
-    padding: 0 1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    padding: 0;
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+    color: var(--gray-600);
+    font-weight: 400;
   }
   
   .hero-actions {
     flex-direction: column;
-    padding: 0 1rem;
-    gap: 1rem;
+    padding: 0;
+    gap: 1.25rem;
+    align-items: center;
   }
   
   .hero-actions .btn {
     width: 100%;
-    max-width: 320px;
-    font-size: 1.125rem;
-    padding: 1rem 2rem;
-    min-height: 56px;
+    max-width: 350px;
+    font-size: 1.25rem;
+    padding: 1.25rem 2rem;
+    min-height: 64px;
     font-weight: 700;
+    border-radius: 16px;
+    letter-spacing: 0.5px;
+  }
+  
+  .hero-actions .btn i {
+    font-size: 1.125rem;
+    margin-right: 0.75rem;
   }
   
   .hero-stats {
-    padding: 0 1rem;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    padding: 0;
+    gap: 2rem;
+    margin-top: 3rem;
+    justify-content: space-around;
+  }
+  
+  .stat-item {
+    text-align: center;
+    flex: 1;
   }
   
   .stat-number {
-    font-size: 1.75rem;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary-blue);
+    display: block;
+    margin-bottom: 0.5rem;
   }
   
   .stat-label {
-    font-size: 1rem;
-    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    margin-top: 0;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+  
+  .products-section {
+    padding: 3rem 0;
+  }
+  
+  .section-header {
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  
+  .see-more-link {
+    font-size: 1.125rem;
+    font-weight: 600;
   }
 }
 

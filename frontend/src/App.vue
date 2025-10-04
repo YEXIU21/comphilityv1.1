@@ -192,4 +192,84 @@ body {
   outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
 }
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 48px;
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  
+  .form-input {
+    min-height: 48px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+}
+
+/* iPhone 14 Pro Max (430px width) - Enhanced Mobile Sizing */
+@media (max-width: 430px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+  
+  .btn {
+    min-height: var(--btn-mobile-height);
+    padding: var(--btn-mobile-padding);
+    font-size: var(--btn-mobile-font-size);
+    border-radius: var(--btn-mobile-border-radius);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+  }
+  
+  .form-input {
+    min-height: 56px;
+    padding: 1rem 1.25rem;
+    font-size: 1.125rem;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+  
+  .form-input:focus {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover {
+    transform: none;
+  }
+  
+  .btn:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Utility classes for mobile */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
 </style>

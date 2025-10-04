@@ -131,17 +131,59 @@
 
     <!-- Mobile Menu -->
     <div v-show="mobileMenuOpen" class="mobile-menu">
+      <!-- Mobile Search -->
+      <div class="mobile-search">
+        <div class="mobile-search-container">
+          <div class="mobile-search-box">
+            <input 
+              type="text" 
+              placeholder="Search products..." 
+              v-model="searchQuery"
+              @keyup.enter="performSearch"
+              class="mobile-search-field"
+            />
+            <button @click="performSearch" class="mobile-search-button" :disabled="!searchQuery.trim()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
       <div class="mobile-nav">
-        <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">HOME</router-link>
-        <router-link to="/products" class="mobile-nav-link" @click="closeMobileMenu">PRODUCTS</router-link>
-        <router-link to="/build-pc" class="mobile-nav-link" @click="closeMobileMenu">BUILD PC</router-link>
-        <router-link to="/laptops" class="mobile-nav-link" @click="closeMobileMenu">LAPTOPS</router-link>
-        <router-link to="/pc-sets" class="mobile-nav-link" @click="closeMobileMenu">PC SETS</router-link>
+        <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
+          <i class="fas fa-home"></i>
+          HOME
+        </router-link>
+        <router-link to="/products" class="mobile-nav-link" @click="closeMobileMenu">
+          <i class="fas fa-th-large"></i>
+          PRODUCTS
+        </router-link>
+        <router-link to="/build-pc" class="mobile-nav-link" @click="closeMobileMenu">
+          <i class="fas fa-wrench"></i>
+          BUILD PC
+        </router-link>
+        <router-link to="/laptops" class="mobile-nav-link" @click="closeMobileMenu">
+          <i class="fas fa-laptop"></i>
+          LAPTOPS
+        </router-link>
+        <router-link to="/pc-sets" class="mobile-nav-link" @click="closeMobileMenu">
+          <i class="fas fa-desktop"></i>
+          PC SETS
+        </router-link>
       </div>
       <div class="mobile-auth">
-        <button v-if="!isAuthenticated" @click="openLoginModal" class="btn btn-primary">Login</button>
-        <button v-if="!isAuthenticated" @click="openSignupModal" class="btn btn-outline">Sign Up</button>
-        <button v-if="isAuthenticated" @click="logout" class="btn btn-secondary">Logout</button>
+        <button v-if="!isAuthenticated" @click="openLoginModal" class="btn btn-primary mobile-auth-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </button>
+        <button v-if="!isAuthenticated" @click="openSignupModal" class="btn btn-outline mobile-auth-btn">
+          <i class="fas fa-user-plus"></i>
+          Sign Up
+        </button>
+        <button v-if="isAuthenticated" @click="logout" class="btn btn-secondary mobile-auth-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </button>
       </div>
     </div>
   </header>
@@ -249,6 +291,12 @@ export default {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(91, 126, 255, 0.1);
   width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* ===== COMPLETE NAVBAR OVERHAUL ===== */
@@ -733,13 +781,73 @@ export default {
   display: none;
   background: var(--white);
   border-top: 1px solid var(--gray-200);
-  padding: 0.5rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 1000;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Mobile Search */
+.mobile-search {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-50);
+}
+
+.mobile-search-container {
+  width: 100%;
+}
+
+.mobile-search-box {
+  display: flex;
+  background: white;
+  border-radius: 16px;
+  border: 2px solid var(--gray-200);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-search-box:focus-within {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.mobile-search-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+  background: transparent;
+}
+
+.mobile-search-field::placeholder {
+  color: var(--gray-500);
+}
+
+.mobile-search-button {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  font-size: 1.125rem;
+  transition: all 0.2s ease;
+  min-width: 56px;
+}
+
+.mobile-search-button:hover {
+  background: var(--primary-blue-dark);
+}
+
+.mobile-search-button:disabled {
+  background: var(--gray-300);
+  cursor: not-allowed;
 }
 
 .mobile-nav {
@@ -749,16 +857,25 @@ export default {
 }
 
 .mobile-nav-link {
-  padding: 1.25rem 2rem;
+  padding: 1.5rem 2rem;
   color: var(--gray-700);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   border-bottom: 1px solid var(--gray-100);
-  transition: all 0.2s ease;
-  min-height: 56px;
+  transition: all 0.3s ease;
+  min-height: 64px;
   display: flex;
   align-items: center;
+  gap: 1rem;
+  font-size: 1.25rem;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+
+.mobile-nav-link i {
   font-size: 1.125rem;
+  width: 24px;
+  color: var(--primary-blue);
 }
 
 .mobile-nav-link:hover {
@@ -783,7 +900,21 @@ export default {
 .mobile-auth .btn {
   width: 100%;
   justify-content: center;
-  min-height: 48px;
+  min-height: 56px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.mobile-auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mobile-auth-btn i {
+  font-size: 1rem;
 }
 
 /* Responsive */
@@ -815,10 +946,17 @@ export default {
 
 @media (max-width: 768px) {
   .navbar-content {
-    grid-template-columns: auto 1fr auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    align-items: center;
+    height: auto;
+    min-height: 70px;
+  }
+  
+  .navbar-left {
+    flex: 0 0 auto;
   }
   
   .navbar-center {
@@ -826,8 +964,12 @@ export default {
   }
   
   .navbar-right {
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
-    order: 2;
+    flex: 0 0 auto;
+    overflow: visible;
+    min-width: 0;
   }
   
   .search-field {
@@ -848,7 +990,7 @@ export default {
 
   .mobile-menu-toggle {
     display: flex;
-    order: 3;
+    margin-left: 0.5rem;
   }
   
   .mobile-menu {
@@ -858,20 +1000,28 @@ export default {
 
 @media (max-width: 480px) {
   .navbar-content {
-    grid-template-columns: 1fr auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0.75rem;
     gap: 0.5rem;
-    align-items: center;
+    height: auto;
+    min-height: 65px;
   }
   
   .navbar-left {
-    justify-self: start;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
   }
   
   .navbar-right {
+    display: flex;
+    align-items: center;
     gap: 0.375rem;
-    order: 1;
-    justify-self: end;
+    flex: 0 0 auto;
+    overflow: visible;
+    min-width: 0;
   }
   
   .search-field {
@@ -897,52 +1047,96 @@ export default {
   }
   
   .mobile-menu-toggle {
-    order: 2;
+    margin-left: 0.375rem;
   }
 }
 
 /* iPhone 14 Pro Max and similar devices (430px width) - Enhanced Mobile Sizing */
 @media (max-width: 430px) {
   .navbar-content {
-    grid-template-columns: 1fr auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     height: auto;
-    min-height: 70px;
+    min-height: 80px;
   }
   
   .navbar-left {
-    justify-self: start;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
   }
   
   .navbar-right {
-    gap: 0.75rem;
-    order: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    order: 2;
   }
   
   .search-container {
     display: none;
   }
   
+  /* Ensure no overflow on mobile */
+  .navbar-right {
+    overflow: visible;
+    min-width: 0;
+  }
+  
+  .action-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
   .action-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 1.2rem;
-    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+  }
+  
+  .action-icon:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
   }
   
   .logo-text {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
   }
   
   .mobile-menu-toggle {
     display: flex;
-    order: 2;
-    padding: 0.75rem;
-    min-width: 48px;
-    min-height: 48px;
-    font-size: 1.25rem;
+    order: 3;
+    padding: 1rem;
+    min-width: 52px;
+    min-height: 52px;
+    font-size: 1.4rem;
+    border-radius: 12px;
+    background: var(--primary-blue);
+    color: white;
+  }
+  
+  .mobile-menu-toggle:hover {
+    background: var(--primary-blue-dark);
+    transform: translateY(-2px);
+  }
+  
+  .notification-badge {
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+    font-weight: 700;
   }
 }
 </style>

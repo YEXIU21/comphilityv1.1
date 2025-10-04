@@ -785,19 +785,162 @@ export default {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .chat-widget {
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
   }
   
   .chat-window {
-    width: calc(100vw - 20px);
+    width: calc(100vw - 30px);
     max-width: 380px;
-    height: 60vh;
-    max-height: 500px;
+    height: 65vh;
+    max-height: 520px;
+    border-radius: 16px;
+  }
+  
+  .chat-header {
+    padding: 1.25rem;
   }
   
   .action-buttons {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .action-btn {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .messages-container {
+    padding: 1.25rem;
+  }
+  
+  .chat-input-container {
+    padding: 1.25rem;
+  }
+}
+
+/* iPhone 14 Pro Max (430px width) - Enhanced Mobile Chat */
+@media (max-width: 430px) {
+  .chat-widget {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .chat-button {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+    border-radius: 35px;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
+  }
+  
+  .chat-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.35);
+  }
+  
+  .notification-badge {
+    top: -8px;
+    right: -8px;
+    min-width: 26px;
+    height: 26px;
+    font-size: 0.875rem;
+    font-weight: 800;
+  }
+  
+  .chat-window {
+    width: calc(100vw - 24px);
+    height: 75vh;
+    max-height: none;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  .chat-header {
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .agent-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+  
+  .agent-details h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+  
+  .status {
+    font-size: 0.875rem;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.125rem;
+    border-radius: 10px;
+  }
+  
+  .quick-actions {
+    padding: 1.5rem;
+  }
+  
+  .quick-actions h5 {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .action-buttons {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .action-btn {
+    padding: 1.25rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    min-height: 60px;
+  }
+  
+  .action-btn i {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .messages-container {
+    padding: 1.5rem;
+  }
+  
+  .welcome-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+  }
+  
+  .welcome-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .typing-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+  
+  .typing-bubble {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+  
+  .chat-input-container {
+    padding: 1.5rem;
+    border-radius: 0 0 20px 20px;
   }
 }
 </style>

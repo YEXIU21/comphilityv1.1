@@ -398,70 +398,124 @@ export default {
 @media (max-width: 430px) {
   .product-card {
     max-width: 100%;
-    border-radius: 16px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(91, 126, 255, 0.1);
+  }
+  
+  .product-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(91, 126, 255, 0.12);
+  }
+  
+  .product-image {
+    border-radius: 20px 20px 0 0;
   }
   
   .product-info {
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
   
   .product-title {
-    font-size: 1.125rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
     line-height: 1.3;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--gray-900);
   }
   
   .product-price {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .original-price {
+    font-size: 1rem;
+    margin-right: 0.75rem;
   }
   
   .current-price {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+  }
+  
+  .product-actions {
+    gap: 0.75rem;
+    margin-top: 1.25rem;
   }
   
   .buy-btn {
-    padding: 0.875rem 1.25rem;
-    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
     font-weight: 700;
-    min-height: 48px;
+    min-height: 56px;
+    border-radius: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .buy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(91, 126, 255, 0.25);
+  }
+  
+  .action-icons {
+    gap: 0.75rem;
   }
   
   .action-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
+    width: 56px;
+    height: 56px;
+    font-size: 1.25rem;
+    border-radius: 16px;
+    border: 2px solid var(--gray-200);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+  }
+  
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
   
   .wishlist-btn {
-    width: 2.75rem;
-    height: 2.75rem;
-    top: 0.75rem;
-    right: 0.75rem;
-    font-size: 1.1rem;
+    width: 3rem;
+    height: 3rem;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
   }
   
   .product-badge {
-    top: 0.75rem;
-    left: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border-radius: 8px;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   
   .product-rating {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    gap: 0.5rem;
+  }
+  
+  .stars {
+    gap: 0.25rem;
   }
   
   .star {
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
   
   .rating-text {
-    font-size: 0.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-600);
   }
 }
 </style>
