@@ -13,6 +13,11 @@
     <LoginModal v-if="showLoginModal" @close="hideLoginModal" />
     <SignupModal v-if="showSignupModal" @close="hideSignupModal" />
     <PasswordResetModal v-if="showPasswordResetModal" @close="hidePasswordResetModal" />
+    
+    <!-- Debug info (remove in production) -->
+    <div v-if="showLoginModal" style="position: fixed; top: 10px; left: 10px; background: red; color: white; padding: 10px; z-index: 9999;">
+      LOGIN MODAL SHOULD BE VISIBLE: {{ showLoginModal }}
+    </div>
   </div>
 </template>
 <script>

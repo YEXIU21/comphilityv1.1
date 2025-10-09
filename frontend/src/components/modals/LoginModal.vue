@@ -108,6 +108,10 @@ export default {
       error: ''
     }
   },
+  mounted() {
+    console.log('🎉 [LoginModal] Login modal mounted and should be visible!')
+    console.log('🔍 [LoginModal] Vuex state showLoginModal:', this.$store.state.showLoginModal)
+  },
   methods: {
     ...mapMutations([
       'hideLoginModal', 

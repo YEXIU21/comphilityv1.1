@@ -101,21 +101,25 @@
             </div>
 
             <!-- Regular User Icon (only for non-admin users) -->
-            <div v-else class="user-dropdown-container" @click="toggleUserDropdown" v-click-outside="hideUserDropdown">
-              <button class="action-icon user-icon">
+            <div v-else class="user-dropdown-container">
+              <!-- If user is not authenticated, show login button -->
+              <button v-if="!isAuthenticated" @click="handleUserIconClick" class="action-icon user-icon" title="Login">
                 <i class="fas fa-user"></i>
               </button>
-              <div v-show="showUserDropdown" class="user-dropdown">
-                <div v-if="!isAuthenticated" class="auth-options">
-                  <button @click="openSignupModal" class="dropdown-item">Sign Up</button>
-                  <button @click="openLoginModal" class="dropdown-item">Login</button>
-                </div>
-                <div v-else class="user-options">
-                  <router-link to="/profile" class="dropdown-item">My Profile</router-link>
-                  <router-link to="/wishlist" class="dropdown-item">My Wishlist</router-link>
-                  <router-link to="/cart" class="dropdown-item">My Cart</router-link>
-                  <hr class="dropdown-divider">
-                  <button @click="logout" class="dropdown-item">Logout</button>
+              
+              <!-- If user is authenticated, show dropdown -->
+              <div v-else @click="toggleUserDropdown" v-click-outside="hideUserDropdown">
+                <button class="action-icon user-icon" title="User Menu">
+                  <i class="fas fa-user-circle"></i>
+                </button>
+                <div v-show="showUserDropdown" class="user-dropdown">
+                  <div class="user-options">
+                    <router-link to="/profile" class="dropdown-item">My Profile</router-link>
+                    <router-link to="/wishlist" class="dropdown-item">My Wishlist</router-link>
+                    <router-link to="/cart" class="dropdown-item">My Cart</router-link>
+                    <hr class="dropdown-divider">
+                    <button @click="logout" class="dropdown-item">Logout</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -237,10 +241,29 @@ export default {
       this.mobileMenuOpen = false
     },
     
+    handleUserIconClick(event) {
+      console.log('👆 [AppHeader] User icon clicked!')
+      console.log('🔍 [AppHeader] Event:', event)
+      console.log('🔍 [AppHeader] Target:', event.target)
+      console.log('🔍 [AppHeader] isAuthenticated:', this.isAuthenticated)
+      
+      event.preventDefault()
+      event.stopPropagation()
+      
+      this.openLoginModal()
+    },
+    
     openLoginModal() {
+      console.log('🔓 [AppHeader] openLoginModal called')
+      console.log('🔍 [AppHeader] isAuthenticated:', this.isAuthenticated)
+      console.log('🔍 [AppHeader] showLoginModal state before:', this.$store.state.showLoginModal)
+      
       this.hideUserDropdown()
       this.showLoginModal()
       this.closeMobileMenu()
+      
+      console.log('🔍 [AppHeader] showLoginModal state after:', this.$store.state.showLoginModal)
+      console.log('✅ [AppHeader] Login modal should now be visible')
     },
     
     openPasswordResetModal() {
@@ -606,7 +629,16 @@ export default {
 .action-icon:hover {
   background: var(--gray-100);
   color: var(--primary-blue);
-  transform: translateY(-1px);
+}
+
+.action-icon:active {
+  background: var(--gray-200);
+  color: var(--primary-blue-dark);
+}
+
+.action-icon:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
 }
 
 .action-icon i {
@@ -640,7 +672,6 @@ export default {
 
 .admin-btn:hover {
   background: linear-gradient(135deg, #4a6eef 0%, #3a5edf 100%);
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(91, 126, 255, 0.4);
 }
 
@@ -1104,7 +1135,11 @@ export default {
   
   .action-icon:hover {
     background: rgba(59, 130, 246, 0.1);
-    transform: translateY(-2px);
+  }
+  
+  .action-icon:active {
+    background: rgba(59, 130, 246, 0.2);
+    transform: scale(0.95);
   }
   
   .logo-text {
@@ -1127,7 +1162,11 @@ export default {
   
   .mobile-menu-toggle:hover {
     background: var(--primary-blue-dark);
-    transform: translateY(-2px);
+  }
+  
+  .mobile-menu-toggle:active {
+    background: var(--primary-blue-dark);
+    transform: scale(0.95);
   }
   
   .notification-badge {
