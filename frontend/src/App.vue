@@ -1,23 +1,26 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <div class="main-content">
+    <!-- Customer Layout: Only show for non-admin routes -->
+    <template v-if="!isAdminRoute">
+      <AppHeader />
+      <div class="main-content">
+        <router-view />
+      </div>
+      <AppFooter />
+      
+      <!-- Global Chat Widget (Customer only) -->
+      <ChatWidget />
+    </template>
+    
+    <!-- Admin Layout: Only show for admin routes -->
+    <template v-else>
       <router-view />
-    </div>
-    <AppFooter />
+    </template>
     
-    <!-- Global Chat Widget -->
-    <ChatWidget />
-    
-    <!-- Modals -->
+    <!-- Modals (Available for both customer and admin) -->
     <LoginModal v-if="showLoginModal" @close="hideLoginModal" />
     <SignupModal v-if="showSignupModal" @close="hideSignupModal" />
     <PasswordResetModal v-if="showPasswordResetModal" @close="hidePasswordResetModal" />
-    
-    <!-- Debug info (remove in production) -->
-    <div v-if="showLoginModal" style="position: fixed; top: 10px; left: 10px; background: red; color: white; padding: 10px; z-index: 9999;">
-      LOGIN MODAL SHOULD BE VISIBLE: {{ showLoginModal }}
-    </div>
   </div>
 </template>
 <script>
@@ -40,7 +43,11 @@ export default {
     PasswordResetModal
   },
   computed: {
-    ...mapState(['showLoginModal', 'showSignupModal', 'showPasswordResetModal'])
+    ...mapState(['showLoginModal', 'showSignupModal', 'showPasswordResetModal']),
+    
+    isAdminRoute() {
+      return this.$route.path.startsWith('/admin')
+    }
   },
   methods: {
     ...mapMutations(['hideLoginModal', 'hideSignupModal', 'hidePasswordResetModal']),

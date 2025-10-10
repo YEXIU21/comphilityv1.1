@@ -42,13 +42,6 @@
             >
               Forgot Password?
             </button>
-            <button
-              type="button"
-              @click="openAdminLogin"
-              class="admin-login-link"
-            >
-              Login as Admin
-            </button>
           </div>
           
           <button
@@ -107,10 +100,6 @@ export default {
       isLoading: false,
       error: ''
     }
-  },
-  mounted() {
-    console.log('🎉 [LoginModal] Login modal mounted and should be visible!')
-    console.log('🔍 [LoginModal] Vuex state showLoginModal:', this.$store.state.showLoginModal)
   },
   methods: {
     ...mapMutations([
@@ -185,13 +174,8 @@ export default {
     },
     
     openPasswordReset() {
-      this.hideLoginModal()
+      this.closeModal()
       this.showPasswordResetModal()
-    },
-    
-    openAdminLogin() {
-      // Admin login functionality - to be implemented with backend
-      alert('Admin login will be available after backend integration')
     },
     
     loginWithFacebook() {
@@ -223,13 +207,12 @@ export default {
 
 .form-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 1.5rem;
 }
 
-.forgot-password-link,
-.admin-login-link {
+.forgot-password-link {
   background: none;
   border: none;
   color: var(--primary-blue);
@@ -239,8 +222,7 @@ export default {
   padding: 0;
 }
 
-.forgot-password-link:hover,
-.admin-login-link:hover {
+.forgot-password-link:hover {
   color: var(--primary-blue-dark);
 }
 

@@ -176,6 +176,16 @@ const routes = [
         path: 'statistics',
         name: 'Statistics',
         component: Statistics
+      },
+      {
+        path: 'profile',
+        name: 'AdminProfile',
+        component: () => import('../views/admin/AdminProfile.vue')
+      },
+      {
+        path: 'settings',
+        name: 'AdminSettings',
+        component: () => import('../views/admin/AdminSettings.vue')
       }
     ]
   }

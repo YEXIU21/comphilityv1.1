@@ -1,0 +1,31 @@
+{
+  "name": "comphility-setup-scripts",
+  "version": "1.0.0",
+  "description": "COMPHILITY setup and initialization scripts",
+  "main": "master-setup.js",
+  "scripts": {
+    "setup": "node master-setup.js",
+    "setup:db": "node 01-create-database.js",
+    "setup:admin": "node 02-create-admin.js",
+    "setup:products": "node 03-seed-products.js",
+    "reset:db": "node reset-database.js",
+    "help": "node --help"
+  },
+  "keywords": [
+    "comphility",
+    "setup",
+    "database",
+    "mysql",
+    "initialization"
+  ],
+  "author": "COMPHILITY Team",
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^3.15.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

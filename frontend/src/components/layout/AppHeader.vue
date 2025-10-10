@@ -101,25 +101,21 @@
             </div>
 
             <!-- Regular User Icon (only for non-admin users) -->
-            <div v-else class="user-dropdown-container">
-              <!-- If user is not authenticated, show login button -->
-              <button v-if="!isAuthenticated" @click="handleUserIconClick" class="action-icon user-icon" title="Login">
+            <div v-else class="user-dropdown-container" @click="toggleUserDropdown" v-click-outside="hideUserDropdown">
+              <button class="action-icon user-icon">
                 <i class="fas fa-user"></i>
               </button>
-              
-              <!-- If user is authenticated, show dropdown -->
-              <div v-else @click="toggleUserDropdown" v-click-outside="hideUserDropdown">
-                <button class="action-icon user-icon" title="User Menu">
-                  <i class="fas fa-user-circle"></i>
-                </button>
-                <div v-show="showUserDropdown" class="user-dropdown">
-                  <div class="user-options">
-                    <router-link to="/profile" class="dropdown-item">My Profile</router-link>
-                    <router-link to="/wishlist" class="dropdown-item">My Wishlist</router-link>
-                    <router-link to="/cart" class="dropdown-item">My Cart</router-link>
-                    <hr class="dropdown-divider">
-                    <button @click="logout" class="dropdown-item">Logout</button>
-                  </div>
+              <div v-show="showUserDropdown" class="user-dropdown">
+                <div v-if="!isAuthenticated" class="auth-options">
+                  <button @click="openSignupModal" class="dropdown-item">Sign Up</button>
+                  <button @click="openLoginModal" class="dropdown-item">Login</button>
+                </div>
+                <div v-else class="user-options">
+                  <router-link to="/profile" class="dropdown-item">My Profile</router-link>
+                  <router-link to="/wishlist" class="dropdown-item">My Wishlist</router-link>
+                  <router-link to="/cart" class="dropdown-item">My Cart</router-link>
+                  <hr class="dropdown-divider">
+                  <button @click="logout" class="dropdown-item">Logout</button>
                 </div>
               </div>
             </div>
@@ -241,29 +237,10 @@ export default {
       this.mobileMenuOpen = false
     },
     
-    handleUserIconClick(event) {
-      console.log('👆 [AppHeader] User icon clicked!')
-      console.log('🔍 [AppHeader] Event:', event)
-      console.log('🔍 [AppHeader] Target:', event.target)
-      console.log('🔍 [AppHeader] isAuthenticated:', this.isAuthenticated)
-      
-      event.preventDefault()
-      event.stopPropagation()
-      
-      this.openLoginModal()
-    },
-    
     openLoginModal() {
-      console.log('🔓 [AppHeader] openLoginModal called')
-      console.log('🔍 [AppHeader] isAuthenticated:', this.isAuthenticated)
-      console.log('🔍 [AppHeader] showLoginModal state before:', this.$store.state.showLoginModal)
-      
       this.hideUserDropdown()
       this.showLoginModal()
       this.closeMobileMenu()
-      
-      console.log('🔍 [AppHeader] showLoginModal state after:', this.$store.state.showLoginModal)
-      console.log('✅ [AppHeader] Login modal should now be visible')
     },
     
     openPasswordResetModal() {
@@ -314,12 +291,6 @@ export default {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(91, 126, 255, 0.1);
   width: 100%;
-  overflow-x: hidden;
-}
-
-.container {
-  width: 100%;
-  max-width: 100%;
 }
 
 /* ===== COMPLETE NAVBAR OVERHAUL ===== */
@@ -629,16 +600,7 @@ export default {
 .action-icon:hover {
   background: var(--gray-100);
   color: var(--primary-blue);
-}
-
-.action-icon:active {
-  background: var(--gray-200);
-  color: var(--primary-blue-dark);
-}
-
-.action-icon:focus {
-  outline: 2px solid var(--primary-blue);
-  outline-offset: 2px;
+  transform: translateY(-1px);
 }
 
 .action-icon i {
@@ -672,6 +634,7 @@ export default {
 
 .admin-btn:hover {
   background: linear-gradient(135deg, #4a6eef 0%, #3a5edf 100%);
+  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(91, 126, 255, 0.4);
 }
 
@@ -977,17 +940,10 @@ export default {
 
 @media (max-width: 768px) {
   .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    grid-template-columns: auto 1fr auto auto;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    height: auto;
-    min-height: 70px;
-  }
-  
-  .navbar-left {
-    flex: 0 0 auto;
+    align-items: center;
   }
   
   .navbar-center {
@@ -995,12 +951,8 @@ export default {
   }
   
   .navbar-right {
-    display: flex;
-    align-items: center;
     gap: 0.5rem;
-    flex: 0 0 auto;
-    overflow: visible;
-    min-width: 0;
+    order: 2;
   }
   
   .search-field {
@@ -1021,7 +973,7 @@ export default {
 
   .mobile-menu-toggle {
     display: flex;
-    margin-left: 0.5rem;
+    order: 3;
   }
   
   .mobile-menu {
@@ -1031,28 +983,20 @@ export default {
 
 @media (max-width: 480px) {
   .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    grid-template-columns: 1fr auto auto;
     padding: 0.75rem;
     gap: 0.5rem;
-    height: auto;
-    min-height: 65px;
+    align-items: center;
   }
   
   .navbar-left {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
+    justify-self: start;
   }
   
   .navbar-right {
-    display: flex;
-    align-items: center;
     gap: 0.375rem;
-    flex: 0 0 auto;
-    overflow: visible;
-    min-width: 0;
+    order: 1;
+    justify-self: end;
   }
   
   .search-field {
@@ -1078,7 +1022,7 @@ export default {
   }
   
   .mobile-menu-toggle {
-    margin-left: 0.375rem;
+    order: 2;
   }
 }
 
@@ -1111,12 +1055,6 @@ export default {
     display: none;
   }
   
-  /* Ensure no overflow on mobile */
-  .navbar-right {
-    overflow: visible;
-    min-width: 0;
-  }
-  
   .action-bar {
     display: flex;
     align-items: center;
@@ -1135,11 +1073,7 @@ export default {
   
   .action-icon:hover {
     background: rgba(59, 130, 246, 0.1);
-  }
-  
-  .action-icon:active {
-    background: rgba(59, 130, 246, 0.2);
-    transform: scale(0.95);
+    transform: translateY(-2px);
   }
   
   .logo-text {
@@ -1162,11 +1096,7 @@ export default {
   
   .mobile-menu-toggle:hover {
     background: var(--primary-blue-dark);
-  }
-  
-  .mobile-menu-toggle:active {
-    background: var(--primary-blue-dark);
-    transform: scale(0.95);
+    transform: translateY(-2px);
   }
   
   .notification-badge {

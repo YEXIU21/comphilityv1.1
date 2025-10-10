@@ -32,6 +32,7 @@ backend/dist/
 config/local.json
 config/production.json
 config/development.json
+zzz_screenshots
 
 # Vue.js specific
 *.tgz

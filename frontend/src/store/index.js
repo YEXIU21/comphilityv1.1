@@ -70,10 +70,7 @@ export default createStore({
   mutations: {
     // Modal mutations
     showLoginModal(state) {
-      console.log('🔑 [Vuex] showLoginModal mutation called')
-      console.log('🔍 [Vuex] Before:', state.showLoginModal)
       state.showLoginModal = true
-      console.log('🔍 [Vuex] After:', state.showLoginModal)
     },
     hideLoginModal(state) {
       state.showLoginModal = false
